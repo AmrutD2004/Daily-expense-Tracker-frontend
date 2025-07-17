@@ -1,0 +1,10 @@
+.pdf-only {
+    display: none;
+  }
+  
+  @media print {
+    .pdf-only {
+      display: block;
+    }
+  }
+  
