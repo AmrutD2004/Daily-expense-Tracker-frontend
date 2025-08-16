@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaUserPlus, FaEdit } from 'react-icons/fa';
+import { FaUserPlus, FaEdit, FaSpinner } from 'react-icons/fa';
 import { MdDateRange, MdDelete, MdError } from "react-icons/md";
 import { GiExpense } from "react-icons/gi";
 import { CiCirclePlus, CiShoppingCart } from "react-icons/ci";
@@ -18,6 +18,7 @@ const ManageExpense = () => {
         }
         fetchExpenses(userId)
     }, []);
+    const [loading, setLoading] = useState(false);
 
     const [editExpense, seteditExpense] = useState(null);
 
@@ -41,6 +42,7 @@ const ManageExpense = () => {
     }
 
     const handleUpdate = async () => {
+        setLoading(true);
         try {
             const response = await fetch(`https://daily-expense-tracker-2i0e.onrender.com/api/update_expense/${editExpense.id}/`, {
                 method: 'PUT',
@@ -59,6 +61,8 @@ const ManageExpense = () => {
         catch (error) {
             console.error('Error update', error)
             toast.error('Something went Wrong')
+        }finally{
+            setLoading(false);
         }
     }
     const handleDelete = async (expenseId) => {
@@ -188,7 +192,13 @@ const ManageExpense = () => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" onClick={() => seteditExpense(null)}>Close</button>
-                                <button type="button" className="btn btn-primary" onClick={handleUpdate}>Save changes</button>
+                                {loading ? (
+                                    <button type="button" className="btn btn-primary" disabled>
+                                        <FaSpinner className="icon spin me-2" /> Saving...
+                                    </button>
+                                ) : (
+                                    <button type="button" className="btn btn-primary" onClick={handleUpdate}>Save changes</button>
+                                )}
                             </div>
                         </div>
                     </div>

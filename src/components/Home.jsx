@@ -205,26 +205,8 @@
                             </div>
                             <AnimatedGraph />
                         </div>
-                    </>
-                ) : (
-                    <>
-                        <div className="hero-section">
-                            <div className="hero-content">
-                                <h1>Smart expense management for efficient teams</h1>
-                                <p className="subtitle">
-                                    TrakX empowers finance teams to control employee spending,
-                                    ensure local compliance, and increase efficiency by 3x.
-                                </p>
-                                <div className="button-group">
-                                    <button className="cta-button" onClick={handleClick}>Get Started</button>
-                                </div>
-                            </div>
-                            <AnimatedGraph />
-                        </div>
-                    </>
-                )}
-
-                {/* Features Section */}
+                        <div className='container mb-2'>
+                    <h3>Notifications</h3>
                 <div className="features-section">
                     <div className="feature-card">
                         <FiPieChart className="feature-icon" />
@@ -262,6 +244,26 @@
                         <p>Submit and approve expenses on the go with our mobile-first design</p>
                     </div>
                 </div>
+                </div>
+                        
+                    </>
+                ) : (
+                    <>
+                        <div className="hero-section">
+                            <div className="hero-content">
+                                <h1>Smart expense management for efficient teams</h1>
+                                <p className="subtitle">
+                                    TrakX empowers finance teams to control employee spending,
+                                    ensure local compliance, and increase efficiency by 3x.
+                                </p>
+                                <div className="button-group">
+                                    <button className="cta-button" onClick={handleClick}>Get Started</button>
+                                </div>
+                            </div>
+                            <AnimatedGraph />
+                        </div>
+                    </>
+                )}
             </div>
         );
     };

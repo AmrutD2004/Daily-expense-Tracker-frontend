@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaKey, FaLock, FaLockOpen, FaUserPlus } from 'react-icons/fa';
+import { FaKey, FaLock, FaLockOpen, FaSpinner } from 'react-icons/fa';
 import { MdDateRange } from "react-icons/md";
 import { CiCirclePlus, CiShoppingCart } from "react-icons/ci";
 
@@ -10,6 +10,7 @@ import { RiMoneyRupeeCircleLine } from "react-icons/ri";
 import { useNavigate, Link } from 'react-router-dom'
 
 const ChangePassword = () => {
+    const [loading, setLoading] = useState(false);
 
     const userId = localStorage.getItem('userId');
     const navigate = useNavigate();
@@ -32,6 +33,7 @@ const ChangePassword = () => {
         }
 
         try {
+            setLoading(true);
             const response = await fetch(`https://daily-expense-tracker-2i0e.onrender.com/api/change_password/${userId}/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -58,6 +60,8 @@ const ChangePassword = () => {
         catch (error) {
             console.error('Error:', error);
             toast.error(error.message || 'Something went wrong. Please try again.');
+        }finally{
+            setLoading(false);
         }
     };
 
@@ -135,7 +139,15 @@ const ChangePassword = () => {
 
                 <div className="modal-footer">
                     <button type="submit" className="btn btn-primary w-100">
-                        <FaKey className='me-2' />Change Password
+                        {loading ? (
+                            <>
+                                <FaSpinner className="icon spin me-2" /> Changing...
+                            </>
+                        ) : (
+                            <>
+                                <FaKey className='me-2' />Change Password
+                            </>
+                        )}
                     </button>
                 </div>
             </form>

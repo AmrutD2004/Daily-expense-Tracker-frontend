@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaUserPlus } from 'react-icons/fa';
+import { FaSpinner } from 'react-icons/fa';
 import { MdDateRange } from "react-icons/md";
 import { CiCirclePlus, CiShoppingCart } from "react-icons/ci";
 
@@ -18,6 +18,7 @@ const AddExpense = () => {
 
   const userId = localStorage.getItem('userId');
 
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (!userId) {
       navigate('/');
@@ -30,6 +31,7 @@ const AddExpense = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await fetch("https://daily-expense-tracker-2i0e.onrender.com/api/add_expense/", {
         method: 'POST',
@@ -50,6 +52,8 @@ const AddExpense = () => {
     } catch (error) {
       console.error('Error:', error);
       toast.error('Something went wrong');
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -115,9 +119,11 @@ const AddExpense = () => {
             </div>
 
             {/* Submit Button */}
-            <button type="submit" className="btn btn-primary w-100 lead">
-              Add Expense
-            </button>
+            <div className="mb-3">
+              <button type="submit" className="btn btn-primary w-100 lead">
+                {loading ? (<span><FaSpinner className="icon spin me-2" />please wait...</span>) : ('Add Expense')}
+              </button>
+            </div>
           </form>
         </div>
       </div>

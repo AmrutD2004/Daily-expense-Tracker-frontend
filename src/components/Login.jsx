@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUser, FaLock } from 'react-icons/fa';
+import { FaUser, FaLock, FaSpinner } from 'react-icons/fa';
 import { IoIosMail } from "react-icons/io";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,13 +13,15 @@ const Login = () => {
         Email : '',
         Password : '',
     });
-
+ 
+    const [loading, setLoading] = useState(false);
     const handleChange = (e) => {
         setformData({...formData,[e.target.name]:e.target.value})
     };
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+        setLoading(true);
         try{
             const response=await fetch("https://daily-expense-tracker-2i0e.onrender.com/api/login/",{
                 method : 'POST',
@@ -102,8 +104,8 @@ const Login = () => {
                             <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
                         </div>
 
-                        <button className="login-button" type="submit">
-                            Login
+                        <button className="login-button" type="submit" disabled={loading}>
+                            {loading ? (<span><FaSpinner className="icon spin me-2" />please wait...</span>) : ('Login')}
                         </button>
 
                         <div className="login-footer">

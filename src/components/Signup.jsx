@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { FaUserPlus, FaUser, FaLock } from 'react-icons/fa';
+import { FaUserPlus, FaUser, FaLock, FaSpinner } from 'react-icons/fa';
 import { IoIosMail } from "react-icons/io";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,6 +8,7 @@ import '../assets/css/signup.css'; // Import the CSS file
 import {useNavigate, Link} from 'react-router-dom'
 
 const Signup = () => {
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const [formData, setformData] = useState({
@@ -22,6 +23,7 @@ const Signup = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+        setLoading(true);
         try{
             const response=await fetch("https://daily-expense-tracker-2i0e.onrender.com/api/signup/",{
                 method : 'POST',
@@ -102,8 +104,8 @@ const Signup = () => {
                             </div>
                         </div>
 
-                        <button className="signup-button" type="submit">
-                            <FaUserPlus className="icon" /> Sign Up
+                        <button className="signup-button" type="submit" disabled={loading}>
+                            {loading ? (<span><FaSpinner className="icon spin" /> Signing Up...</span>) : (<span><FaUserPlus className="icon" /> Sign Up</span>)}
                         </button>
                         <div className="signup-footer">
                             Already have an account? <Link to="/login">Login</Link>
