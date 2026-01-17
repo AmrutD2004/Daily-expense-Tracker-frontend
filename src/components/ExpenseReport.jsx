@@ -57,7 +57,7 @@ const ExpenseReport = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await fetch(`https://daily-expense-tracker-2i0e.onrender.com/api/search_expense/${userId}/?from=${fromDate}&to=${toDate}`);
+            const response = await fetch(`https://daily-expense-tracker-backend-xsqb.onrender.com/api/search_expense/${userId}/?from=${fromDate}&to=${toDate}`);
             const data = await response.json();
             setExpenses(data.expenses || []);
             setGrandTotal(data.total || 0);
