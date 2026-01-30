@@ -32,7 +32,7 @@ const ManageExpense = () => {
 
     const fetchExpenses = async (userId) => {
         try {
-            const response = await fetch(`https://daily-expense-tracker-backend-xsqb.onrender.com/api/manage_expense/${userId}`)
+            const response = await fetch(`https://marri.pythonanywhere.com/api/manage_expense/${userId}`)
             const data = await response.json();
             setExpenses(data);
         }
@@ -44,7 +44,7 @@ const ManageExpense = () => {
     const handleUpdate = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`https://daily-expense-tracker-backend-xsqb.onrender.com/api/update_expense/${editExpense.id}/`, {
+            const response = await fetch(`https://marri.pythonanywhere.com/api/update_expense/${editExpense.id}/`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' }, // FIXED
                 body: JSON.stringify(editExpense)
@@ -68,7 +68,7 @@ const ManageExpense = () => {
     const handleDelete = async (expenseId) => {
         if(window.confirm('Are you sure you want to delete this expense?')){
             try {
-                const response = await fetch(`https://daily-expense-tracker-backend-xsqb.onrender.com/api/delete_expense/${expenseId}/`, {
+                const response = await fetch(`https://marri.pythonanywhere.com/api/delete_expense/${expenseId}/`, {
                     method: 'DELETE'
                 })
                 if (response.ok) {

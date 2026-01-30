@@ -34,7 +34,7 @@ const ChangePassword = () => {
 
         try {
             setLoading(true);
-            const response = await fetch(`https://daily-expense-tracker-backend-xsqb.onrender.com/api/change_password/${userId}/`, {
+            const response = await fetch(`https://marri.pythonanywhere.com/api/change_password/${userId}/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

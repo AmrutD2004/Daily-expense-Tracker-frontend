@@ -25,7 +25,7 @@ const Signup = () => {
         e.preventDefault();
         setLoading(true);
         try{
-            const response=await fetch("https://daily-expense-tracker-backend-xsqb.onrender.com/api/signup/",{
+            const response=await fetch("https://marri.pythonanywhere.com/api/signup/",{
                 method : 'POST',
                 header: {'Content-Type': 'application/json'},
                 body : JSON.stringify(formData)

@@ -55,7 +55,7 @@ const Dashboard = () => {
 
     const fetchExpenses = async (userId) => {
         try {
-            const response = await fetch(`https://daily-expense-tracker-backend-xsqb.onrender.com/api/manage_expense/${userId}`)
+            const response = await fetch(`https://marri.pythonanywhere.com/api/manage_expense/${userId}`)
             const data = await response.json();
             setExpenses(data);
 
